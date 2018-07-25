@@ -23,3 +23,5 @@ const PORT = process.env.PORT || 5000;
 }
 
 4.  create .gitignore file
+
+#www.mlab.com to host mongo database
