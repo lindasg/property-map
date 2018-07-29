@@ -1,3 +1,5 @@
 node_modules
 client_id.json
 dev.js
+.env.production
+.env.development
