@@ -1,15 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
+require('./models/Properties');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
-require('./models/User');
-require('./models/Survey');
-require('./services/passport');
-const authRoutes = require('./routes/authRoutes');
-const billingRoutes = require('./routes/billingRoutes');
-const surveyRoutes = require('./routes/surveyRoutes');
+const getPropertiesData = require('./services/getPropertiesData');
+const propertyRoutes = require('./routes/propertyRoutes');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -17,22 +12,19 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
+setInterval(() => {
+  const d=new Date().getDate();
+  if (d > 15 && d < 20) {
+    getPropertiesData();
+  }
+}, 86400000);
+
 const app = express();
 
 //middlewares
 app.use(bodyParser.json());
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
 
-authRoutes(app);
-billingRoutes(app);
-surveyRoutes(app);
+propertyRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets like our main.js file or main.css file
