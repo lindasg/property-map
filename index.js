@@ -14,10 +14,12 @@ mongoose.connect(
 
 setInterval(() => {
   const d=new Date().getDate();
+  console.log(d);
   if (d > 15 && d < 20) {
     getPropertiesData();
   }
 }, 86400000);
+//getPropertiesData();
 
 const app = express();
 

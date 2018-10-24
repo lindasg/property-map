@@ -14,7 +14,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <PropertyOnMap />
+        <PropertyOnMap
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxnqidveDd6la-deaxAMAOuZAe5tbTys4"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
         </div>
       </BrowserRouter>
     );
