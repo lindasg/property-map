@@ -24,13 +24,6 @@ module.exports = async () => {
     const developerSaleData = await axios({method: 'get', url: developerSaleURL, headers: {AccessKey: keys.uraKey, Token: uraToken} });
 
     if (developerSaleData.data.Result.length > 0) {
-      /*await Property.remove({});
-      _.map(developerSaleData.data.Result, async data => {
-
-        const property =new Property(data);
-        property.dateUpdated = Date();
-        await property.save();
-      }) */
       _.map(developerSaleData.data.Result, async data => {
         query = await Property.findOneAndUpdate({project: data.project}, {$set: {developerSales: data.developerSales, dateUpdated: Date()}});
         // if property not exist

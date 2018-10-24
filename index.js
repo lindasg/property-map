@@ -7,10 +7,11 @@ const getPropertiesData = require('./services/getPropertiesData');
 const propertyRoutes = require('./routes/propertyRoutes');
 
 mongoose.Promise = global.Promise;
+
 mongoose.connect(
   keys.mongoURI,
   { useNewUrlParser: true }
-);
+)
 
 setInterval(() => {
   const d=new Date().getDate();
